@@ -23,7 +23,7 @@ const Login: NextPage = () => {
                                     className="w-full pl-4 pr-10 py-3 leading-none shadow-sm focus:outline-none focus:shadow-outline text-gray-700 bg-transparent"
                                     placeholder="Email" id="email" />
                                 <label htmlFor="email">
-                                    <MailIcon className="h-5 w-5 mr-3 text-gray-700 font-bold" />
+                                    <MailIcon className="h-5 w-5 mr-3 text-gray-400 font-bold" />
                                 </label>
                             </div>
                             <div className="mt-5 flex flex-row items-center bg-gray-200 rounded-lg">
@@ -31,7 +31,7 @@ const Login: NextPage = () => {
                                     className="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-700 bg-transparent"
                                     placeholder="Password" id="password" />
                                 <label htmlFor="password">
-                                    <LockClosedIcon className="h-5 w-5 mr-3 text-gray-700 font-bold" />
+                                    <LockClosedIcon className="h-5 w-5 mr-3 text-gray-400 font-bold" />
                                 </label>
                             </div>
                         </section>
