@@ -1,6 +1,4 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import { useEffect } from 'react'
 import App from '../components/app/App'
 import Login from '../components/auth/Login'
@@ -13,7 +11,18 @@ const Home: NextPage = () => {
     }
   });
 
-  return (!logged) ? (<Login />) : <App />;
+  return !logged ? (
+    <section>
+      <title>yNotes :: Login Page</title>
+      <Login />
+    </section>
+  ) :
+    (
+      <section>
+        <title>yNotes :: Home Page</title>
+        <App />
+      </section>
+    );
 }
 
 export default Home
