@@ -8,13 +8,14 @@ const Login: NextPage = () => {
 
     return (
         <section className="w-full min-h-screen top-0 bg-gray-900 flex flex-col justify-center items-center">
-            <div className="w-3/4 flex flex-row mt-auto">
-                <div className="w-1/2 rounded-l-3xl flex flex-row justify-center items-center px-16 py-40" style={{ background: color, transition: 'all', transitionDuration: '0.1s' }}>
+            <div className="mt-auto flex flex-col md:w-3/4 md:flex-row">
+                <h1 className="md:hidden mb-12 text-center text-4xl font-bold text-white opacity-90">yNotes</h1>
+                <div className="md:w-1/2 md:rounded-l-3xl md:px-16 md:py-40 hidden md:flex flex-row justify-center items-center" style={{ background: color, transition: 'all', transitionDuration: '0.1s' }}>
                     <Illustration color={color} height="auto" width="60%" />
                 </div>
-                <div className="w-1/2 bg-gray-700 rounded-r-3xl px-16 flex flex-row items-center justify-center">
-                    <div className="w-3/4">
-                        <div className="text-white text-3xl font-bold">
+                <div className="md:w-1/2 md:rounded-l-none md:rounded-r-3xl md:py-0 md:px-16 rounded-3xl md:mx-0 bg-gray-700 py-12 mx-6 px-6 flex flex-row items-center justify-center">
+                    <div className="md:w-3/4">
+                        <div className="md:text-left text-white text-3xl font-bold text-center">
                             Login
                         </div>
                         <section>
@@ -36,8 +37,8 @@ const Login: NextPage = () => {
                             </div>
                         </section>
                         <div className="flex flex-row justify-between items-center">
-                            <button className="mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300" type="submit">Login</button>
-                            <button className="mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300" type="submit">Register</button>
+                            <button className="md:w-auto md:mr-0 mr-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300" type="submit">Login</button>
+                            <button className="md:w-auto md:ml-0 ml-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300" type="submit">Register</button>
                         </div>
                     </div>
                 </div>
