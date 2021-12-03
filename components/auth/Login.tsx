@@ -1,10 +1,16 @@
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Illustration from './Illustration';
 import { MailIcon, LockClosedIcon, CodeIcon } from '@heroicons/react/outline';
+import theme from "../../utils/theme";
 
 const Login: NextPage = () => {
-    const [color, setColor] = useState('#34d399');
+    const [color, setColor] = useState('');
+
+    useEffect(() => {
+        const color = theme.getUserColor();
+        setColor(color);
+    }, []);
 
     return (
         <section className="w-full min-h-screen top-0 bg-gray-900 flex flex-col justify-center items-center">
