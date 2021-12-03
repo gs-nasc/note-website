@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage } from 'next';
 import { useEffect } from 'react'
 import App from '../components/app/App'
 import Login from '../components/auth/Login'
