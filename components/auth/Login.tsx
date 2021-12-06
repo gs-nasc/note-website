@@ -5,7 +5,7 @@ import { MailIcon, LockClosedIcon, CodeIcon } from '@heroicons/react/outline';
 import theme from "../../utils/theme";
 
 const Login: NextPage = () => {
-    const [color, setColor] = useState('');
+    const [color, setColor] = useState('#000000');
 
     useEffect(() => {
         const color = theme.getUserColor();
@@ -43,8 +43,8 @@ const Login: NextPage = () => {
                             </div>
                         </section>
                         <div className="flex flex-row justify-between items-center">
-                            <button className="md:w-auto md:mr-0 mr-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300" type="submit">Login</button>
-                            <button className="md:w-auto md:ml-0 ml-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300" type="submit">Register</button>
+                            <button className="md:w-auto md:mr-0 mr-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white border-black" style={{background: color}} type="submit">Login</button>
+                            <button className="md:w-auto md:ml-0 ml-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white border-black" style={{background: color}} type="submit">Register</button>
                         </div>
                     </div>
                 </div>

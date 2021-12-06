@@ -1,11 +1,18 @@
 import { CodeIcon, SearchIcon } from "@heroicons/react/outline";
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import theme from "../../utils/theme";
 
 const App: NextPage = () => {
-    const [color, setColor] = useState('#34d399');
+    const [color, setColor] = useState('#000000');
+
+    useEffect(() => {
+        const color = theme.getUserColor();
+        setColor(color);
+    }, []);
+
     return (
-        <section className="w-full min-h-screen top-0 bg-gray-900 px-64 py-12">
+        <section className="w-full min-h-screen top-0 bg-gray-900 px-96 py-12">
             <div className="flex flex-row w-full items-center justify-center">
                 <div className="w-3/4">
                     <h1 className="text-4xl font-bold text-white opacity-90 flex items-center mb-2">yNotes</h1>
