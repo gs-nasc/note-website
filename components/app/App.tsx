@@ -2,6 +2,7 @@ import { CodeIcon, SearchIcon } from "@heroicons/react/outline";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import theme from "../../utils/theme";
+import Note from "./note/Note";
 
 const App: NextPage = () => {
     const [color, setColor] = useState('#000000');
@@ -31,6 +32,9 @@ const App: NextPage = () => {
                 <label htmlFor="search">
                     <SearchIcon className="h-5 w-5 mr-3 text-gray-400 font-bold" />
                 </label>
+            </div>
+            <div className="py-8">
+                <Note id={1} title="Teste" color="#ffffff" />
             </div>
             <footer className="mt-auto">
                 <div className="w-full flex flex-row justify-center items-center py-3">
