@@ -1,7 +1,14 @@
 import axios from 'axios';
 import config from '../config.json';
 
+/**
+ * @class Task
+ */
 const Task = {
+    /**
+     * @description Get all tasks
+     * @returns {Promise<{status: boolean, message: string}}
+     */
     getAll: (): Promise<{ status: boolean, message: string }> => {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
@@ -24,6 +31,11 @@ const Task = {
             }
         });
     },
+    /**
+     * @description Get task by id
+     * @param id User id
+     * @returns {Promise<{status: boolean, message: string}>}
+     */
     getById: (id: number): Promise<{ status: boolean, message: string }> => {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
@@ -46,6 +58,13 @@ const Task = {
             }
         });
     },
+    /**
+     * @description Create new task
+     * @param {string} title Task title
+     * @param {string} description Task description
+     * @param {string} color Task color
+     * @return {Promise<{ status: boolean, message: string }>} 
+     */
     create(title: string, description: string, color: string): Promise<{ status: boolean, message: string }> {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
@@ -72,6 +91,15 @@ const Task = {
             }
         });
     },
+    /**
+     * @description Update task
+     * @param id Task id
+     * @param title Task title
+     * @param description Task description
+     * @param color Task color
+     * @param completed Task completed
+     * @returns {Promise<{status: boolean, message: string}>}
+     */
     update(id: number, title: string, description: string, color: string, completed: boolean): Promise<{ status: boolean, message: string }> {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
@@ -99,6 +127,11 @@ const Task = {
             }
         });
     },
+    /**
+     * @description Delete task
+     * @param id Task id
+     * @returns {Promise<{status: boolean, message: string}>}
+     */
     delete(id: number): Promise<{ status: boolean, message: string }> {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
