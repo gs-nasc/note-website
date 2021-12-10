@@ -4,7 +4,6 @@ import config from '../config.json';
 const Auth = {
     login: (email: string, password: string): Promise<{ status: boolean, message: string }> => {
         return new Promise((resolve) => {
-            console.log(config.apiUrl + '/api/v1/login');
             axios.post(config.apiUrl + '/api/v1/login', { email, password }).then(response => {
                 if (response.status === 200) {
                     resolve({
