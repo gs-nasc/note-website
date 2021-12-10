@@ -1,6 +1,9 @@
 import axios from 'axios';
 import config from '../config.json';
 
+/**
+ * @class Task
+ */
 const Auth = {
     /**
      * @description Authenticate user
