@@ -8,6 +8,7 @@ import Auth from "../../services/auth";
 const Login: NextPage = () => {
     const [color, setColor] = useState('#000000');
     const [isLoginLoading, setIsLoginLoading] = useState(false);
+    const [isRegisterLoading, setIsRegisterLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -15,10 +16,10 @@ const Login: NextPage = () => {
         setIsLoginLoading(true);
         Auth.login(email, password).then((r) => {
             setIsLoginLoading(false);
-            if(r.status) {
+            if (r.status) {
                 window.localStorage.setItem('token', r.message);
                 alert('Login Successful');
-            }else {
+            } else {
                 alert(r.message);
             }
         }).catch((error) => {
@@ -27,10 +28,26 @@ const Login: NextPage = () => {
         });
     };
 
+    const register = () => {
+        setIsRegisterLoading(true);
+        Auth.register(email, password).then((r) => {
+            setIsRegisterLoading(false);
+            if (r.status) {
+                window.localStorage.setItem('token', r.message);
+                alert('Register Successful');
+            } else {
+                alert(r.message);
+            }
+        }).catch((error) => {
+            setIsRegisterLoading(false);
+            console.log(error);
+        });
+    }
+
     useEffect(() => {
         const color = theme.getUserColor();
         setColor(color);
-        
+
     }, []);
 
     return (
@@ -59,7 +76,7 @@ const Login: NextPage = () => {
                                 <input type="password"
                                     className="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-700 bg-transparent"
                                     placeholder="Password" id="password"
-                                    value={password}  onChange={(e) => setPassword(e.target.value)}/>
+                                    value={password} onChange={(e) => setPassword(e.target.value)} />
                                 <label htmlFor="password">
                                     <LockClosedIcon className="h-5 w-5 mr-3 text-gray-400 font-bold" />
                                 </label>
@@ -68,15 +85,30 @@ const Login: NextPage = () => {
                         <div className="flex flex-row justify-between items-center">
                             <button className="md:w-auto md:mr-0 mr-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white border-black" style={{ background: color }} type="submit" onClick={login}>
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                className={(!isLoginLoading ? 'hidden' : '')}
-                                style={{ margin: 'auto', background: 'none', shapeRendering: 'auto' }}
-                                width="20px" height="20px"
-                                viewBox="0 0 100 100"
-                                preserveAspectRatio="xMidYMid">
-                                <circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="35" strokeDasharray="164.93361431346415 56.97787143782138">
-                                    <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1" />
-                                </circle></svg><span className={(isLoginLoading ? 'hidden' : '')}>Login</span></button>
-                            <button className="md:w-auto md:ml-0 ml-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white border-black" style={{ background: color }} type="submit">Register</button>
+                                    className={(!isLoginLoading ? 'hidden' : '')}
+                                    style={{ margin: 'auto', background: 'none', shapeRendering: 'auto' }}
+                                    width="20px" height="20px"
+                                    viewBox="0 0 100 100"
+                                    preserveAspectRatio="xMidYMid">
+                                    <circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="35" strokeDasharray="164.93361431346415 56.97787143782138">
+                                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1" />
+                                    </circle>
+                                </svg>
+                                <span className={(isLoginLoading ? 'hidden' : '')}>Login</span>
+                            </button>
+                            <button className="md:w-auto md:ml-0 ml-2 w-full mt-5 px-4 py-2 rounded-md text-sm font-medium border-b-2 focus:outline-none focus:ring transition text-white border-black" style={{ background: color }} type="submit" onClick={register}>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    className={(!isRegisterLoading ? 'hidden' : '')}
+                                    style={{ margin: 'auto', background: 'none', shapeRendering: 'auto' }}
+                                    width="20px" height="20px"
+                                    viewBox="0 0 100 100"
+                                    preserveAspectRatio="xMidYMid">
+                                    <circle cx="50" cy="50" fill="none" stroke="#fff" strokeWidth="10" r="35" strokeDasharray="164.93361431346415 56.97787143782138">
+                                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1" />
+                                    </circle>
+                                </svg>
+                                <span className={(isRegisterLoading ? 'hidden' : '')}>Register</span>
+                            </button>
                         </div>
                     </div>
                 </div>

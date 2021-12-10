@@ -26,17 +26,26 @@ const Auth = {
             });
         });
     },
-    register: (email: string, password: string) => {
+    register: (email: string, password: string): Promise<{ status: boolean, message: string }> => {
         return new Promise((resolve) => {
             axios.post(config.apiUrl + '/api/v1/register', { email, password }).then(response => {
                 if (response.status === 200) {
-                    resolve(true);
+                    resolve({
+                        status: true,
+                        message: response.data.token
+                    });
                 } else {
-                    resolve(false);
+                    resolve({
+                        status: false,
+                        message: response.data.errors[0].message
+                    });
                 }
             }).catch(error => {
                 console.log(error);
-                resolve(false);
+                resolve({
+                    status: false,
+                    message: error
+                });
             });
         });
     }
