@@ -4,6 +4,7 @@ import Illustration from './Illustration';
 import { MailIcon, LockClosedIcon, CodeIcon, ColorSwatchIcon } from '@heroicons/react/outline';
 import theme from "../../utils/theme";
 import Auth from "../../services/auth";
+import Router from "next/router";
 
 const Login: NextPage = () => {
     const [color, setColor] = useState('#000000');
@@ -19,6 +20,7 @@ const Login: NextPage = () => {
             if (r.status) {
                 window.localStorage.setItem('token', r.message);
                 alert('Login Successful');
+                Router.push('/home');
             } else {
                 alert(r.message);
             }
@@ -35,6 +37,7 @@ const Login: NextPage = () => {
             if (r.status) {
                 window.localStorage.setItem('token', r.message);
                 alert('Register Successful');
+                Router.push('/home');
             } else {
                 alert(r.message);
             }

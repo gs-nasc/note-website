@@ -1,17 +1,16 @@
 import type { NextPage } from 'next';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import App from '../components/app/App'
 import Login from '../components/auth/Login'
 
 const Home: NextPage = () => {
-  let logged = false;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      logged = !!window.localStorage.getItem('token');
-    }
+    setIsLoggedIn(!!window.localStorage.getItem('token'));
   });
 
-  return !logged ? (
+  return !isLoggedIn ? (
     <section>
       <title>yNotes :: Login Page</title>
       <Login />
