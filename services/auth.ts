@@ -4,7 +4,7 @@ import config from '../config.json';
 /**
  * @class Task
  */
-const Auth = {
+const AuthService = {
     /**
      * @description Authenticate user
      * @param email  User email
@@ -65,4 +65,4 @@ const Auth = {
     }
 }
 
-export default Auth;
+export default AuthService;

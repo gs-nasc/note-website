@@ -1,15 +1,23 @@
 import { CodeIcon, SearchIcon, PlusCircleIcon } from "@heroicons/react/outline";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
+import Task from "../../models/task";
+import TaskService from "../../services/task";
 import theme from "../../utils/theme";
 import Note from "./note/Note";
 
 const App: NextPage = () => {
     const [color, setColor] = useState('#000000');
+    const [loading, setLoading] = useState(true);
+    const [tasks, setTasks] = useState(Array<Task>());
 
     useEffect(() => {
         const color = theme.getUserColor();
         setColor(color);
+        TaskService.getAll().then(tasks => {
+            setTasks(tasks.message);
+            setLoading(false);
+        });
     }, []);
 
     return (
@@ -38,31 +46,21 @@ const App: NextPage = () => {
                     <SearchIcon className="h-5 w-5 mr-3 text-gray-400 font-bold" />
                 </label>
             </div>
-            <div className="py-8 pt-2 flex flex-row flex-wrap justify-center">
-                <div className="md:w-6/12 md:pr-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#ffffff" />
-                </div>
-                <div className="md:w-6/12 md:pl-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#34d399" />
-                </div>
-                <div className="md:w-6/12 md:pr-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#ffffff" />
-                </div>
-                <div className="md:w-6/12 md:pl-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#34d399" />
-                </div>
-                <div className="md:w-6/12 md:pr-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#ffffff" />
-                </div>
-                <div className="md:w-6/12 md:pl-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#34d399" />
-                </div>
-                <div className="md:w-6/12 md:pr-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#ffffff" />
-                </div>
-                <div className="md:w-6/12 md:pl-4 my-3 w-full">
-                    <Note id={1} title="Teste" color="#34d399" />
-                </div>
+            <div className={`h-96 my-32 ${loading ? 'flex' : 'hidden'}`}>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    style={{ margin: 'auto', display: 'block', shapeRendering: 'auto' }}
+                    width="100px" height="100px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <circle cx="50" cy="50" r="32" stroke-width="3" stroke="#ffffff" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round">
+                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" keyTimes="0;1" values="0 50 50;360 50 50" />
+                    </circle>
+                </svg>
+            </div>
+            <div className={`py-8 pt-2 flex-row flex-wrap justify-center ${loading ? 'hidden' : 'flex'} md:items-start md:justify-start`}>
+                {
+                    tasks.length < 1 ? (<p className="text-white text-center text-2xl my-64">No notes found.</p>) : tasks.map((task: Task) => (
+                        <Note key={task.id} task={task} />
+                    ))
+                }
             </div>
             <footer className="mt-auto">
                 <div className="w-full flex flex-row justify-center items-center py-3">

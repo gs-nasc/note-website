@@ -1,18 +1,19 @@
 import axios from 'axios';
 import config from '../config.json';
+import Task from '../models/task';
 
 /**
  * @class Task
  */
-const Task = {
+const TaskService = {
     /**
      * @description Get all tasks
      * @returns {Promise<{status: boolean, message: string}}
      */
-    getAll: (): Promise<{ status: boolean, message: string }> => {
+    getAll: (): Promise<{status: boolean, message: Array<Task>}> => {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
-                resolve({ status: false, message: 'No token found' });
+                alert('You are not logged in');
             } else {
                 const path = "/api/v1/tasks";
                 axios.get(config.apiUrl + path, {
@@ -23,10 +24,10 @@ const Task = {
                     if (response.status === 200) {
                         resolve({ status: true, message: response.data });
                     } else {
-                        resolve({ status: false, message: response.data.errors.message });
+                        alert(response.data.errors.message);
                     }
                 }).catch((error) => {
-                    resolve({ status: false, message: error });
+                    alert(error);
                 });
             }
         });
@@ -156,4 +157,4 @@ const Task = {
     },
 }
 
-export default Task;
+export default TaskService;
