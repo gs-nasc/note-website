@@ -8,7 +8,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setIsLoggedIn(!!window.localStorage.getItem('token'));
-  });
+  }, []);
 
   return !isLoggedIn ? (
     <section>
