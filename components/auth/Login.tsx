@@ -70,6 +70,7 @@ const Login: NextPage = () => {
                                 <input type="text"
                                     className="w-full pl-4 pr-10 py-3 leading-none shadow-sm focus:outline-none focus:shadow-outline text-gray-700 bg-transparent"
                                     placeholder="Email" id="email"
+                                    autoComplete="off"
                                     value={email} onChange={(e) => setEmail(e.target.value)} />
                                 <label htmlFor="email">
                                     <MailIcon className="h-5 w-5 mr-3 text-gray-400 font-bold" />
