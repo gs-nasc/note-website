@@ -8,9 +8,9 @@ import Task from '../models/task';
 const TaskService = {
     /**
      * @description Get all tasks
-     * @returns {Promise<{status: boolean, message: string}}
+     * @returns {Promise<{ status: boolean, message: Array<Task> }>}
      */
-    getAll: (): Promise<{status: boolean, message: Array<Task>}> => {
+    getAll: (): Promise<{ status: boolean, message: Array<Task> }> => {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
                 alert('You are not logged in');
@@ -155,6 +155,36 @@ const TaskService = {
             }
         });
     },
+
+    /**
+     * @description Search tasks
+     * @param title Task title
+     * @returns {Promise<{ status: boolean, message: Array<Task> }>}
+     */
+    search(title: string): Promise<{ status: boolean, message: Array<Task> }> {
+        return new Promise((resolve) => {
+            if (localStorage.getItem('token') === null) {
+                alert('You are not logged in');
+            } else {
+                const path = "/api/v1/tasks/search/";
+                axios.post(config.apiUrl + path, {
+                    title
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then((response) => {
+                    if (response.status === 200) {
+                        resolve({ status: true, message: response.data });
+                    } else {
+                        alert(response.data.errors.message);
+                    }
+                }).catch((error) => {
+                    alert(error);
+                });
+            }
+        });
+    }
 }
 
 export default TaskService;

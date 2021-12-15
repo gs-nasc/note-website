@@ -1,6 +1,6 @@
 import { CodeIcon, SearchIcon, PlusCircleIcon } from "@heroicons/react/outline";
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Task from "../../models/task";
 import TaskService from "../../services/task";
 import theme from "../../utils/theme";
@@ -10,6 +10,9 @@ const App: NextPage = () => {
     const [color, setColor] = useState('#000000');
     const [loading, setLoading] = useState(true);
     const [tasks, setTasks] = useState(Array<Task>());
+    const [search, setSearch] = useState('');
+    const [searchTimeout, setSearchTimeout] = useState(setTimeout(() => { }, 1000));
+    const [inSearch, setInSearch] = useState(false);
 
     useEffect(() => {
         const color = theme.getUserColor();
@@ -19,6 +22,22 @@ const App: NextPage = () => {
             setLoading(false);
         });
     }, []);
+
+    const doSearch = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+        if (!!inSearch) {
+            clearTimeout(searchTimeout);
+        }
+        setInSearch(true);
+        setSearchTimeout(setTimeout(() => {
+            TaskService.search(search).then(tasks => {
+                console.log(tasks);
+                setTasks(tasks.message);
+                setInSearch(false);
+            });
+        }, 500));
+        console.log(inSearch);
+    }
 
     return (
         <section className="md:px-96 px-12 w-full min-h-screen top-0 bg-gray-900 py-12">
@@ -41,7 +60,9 @@ const App: NextPage = () => {
             <div className="mt-5 flex flex-row items-center bg-gray-700 rounded-lg">
                 <input type="text"
                     className="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-400 bg-transparent"
-                    placeholder="Type something to search..." id="search" />
+                    placeholder="Type something to search..." id="search"
+                    value={search}
+                    onChange={doSearch} />
                 <label htmlFor="search">
                     <SearchIcon className="h-5 w-5 mr-3 text-gray-400 font-bold" />
                 </label>
@@ -57,7 +78,7 @@ const App: NextPage = () => {
             </div>
             <div className={`py-8 pt-2 flex-row flex-wrap justify-center ${loading ? 'hidden' : 'flex'} md:items-start md:justify-start`}>
                 {
-                    tasks.length < 1 ? (<p className="text-white text-center text-2xl my-64">No notes found.</p>) : tasks.map((task: Task) => (
+                    tasks.length < 1 ? (<p className="text-white text-center text-2xl my-64 w-full">No notes found.</p>) : tasks.map((task: Task) => (
                         <Note key={task.id} task={task} />
                     ))
                 }
