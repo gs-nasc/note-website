@@ -8,6 +8,44 @@ const theme = {
     },
     getUserColor: () => {
         return localStorage.getItem("userColor") || theme.randomColor();
+    },
+    getNotesColor: () => {
+        const colors = [
+            {
+                color: "#26547c",
+                text: "#fff"
+            },
+            {
+                color: "#ef476f",
+                text: "#fff"
+            },
+            {
+                color: "#ffd166",
+                text: "#000"
+            },
+            {
+                color: "#06d6a0",
+                text: "#000"
+            },
+            {
+                color: "#118ab2",
+                text: "#fff"
+            },
+            {
+                color: "#073b4c",
+                text: "#fff"
+            },
+            {
+                color: "#ff5e57",
+                text: "#fff"
+            },
+            {
+                color: "#ffc6ff",
+                text: "#000"
+            }
+        ];
+
+        return colors;
     }
 }
 
