@@ -13,6 +13,7 @@ const App: NextPage = () => {
     const [search, setSearch] = useState('');
     const [searchTimeout, setSearchTimeout] = useState(setTimeout(() => { }, 1000));
     const [inSearch, setInSearch] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
 
     useEffect(() => {
         const color = theme.getUserColor();
@@ -39,6 +40,19 @@ const App: NextPage = () => {
         console.log(inSearch);
     }
 
+    const createNewNote = () => {
+        setIsAdding(true);
+        if(isAdding) {
+            alert('You already creating a note');
+            return;
+        }
+        const color = theme.getRandomNotesColor();
+        TaskService.create('New Note', '', `${color.color}:${color.text}`).then(task => {
+            setTasks([...tasks, task.message]);
+            setIsAdding(false);
+        });
+    }
+
     return (
         <section className="md:px-96 px-12 w-full min-h-screen top-0 bg-gray-900 py-12">
             <div className="flex flex-row w-full items-center justify-center">
@@ -47,7 +61,7 @@ const App: NextPage = () => {
                     <p className="text-xl text-white opacity-90">Create and save notes, your notes can be seen below.</p>
                 </div>
                 <div className="md:w-1/4 md:block hidden w-full float-right text-right">
-                    <button className="text-white font-bold py-2 px-4 rounded-full transition-colors opacity-90 hover:opacity-100" style={{ background: color }}>
+                    <button className="text-white font-bold py-2 px-4 rounded-full transition-colors opacity-90 hover:opacity-100" style={{ background: color }} onClick={createNewNote}>
                         New Note
                     </button>
                 </div>
