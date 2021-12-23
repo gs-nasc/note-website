@@ -64,12 +64,12 @@ const TaskService = {
      * @param {string} title Task title
      * @param {string} description Task description
      * @param {string} color Task color
-     * @return {Promise<{ status: boolean, message: string }>} 
+     * @returns {Promise<{ status: boolean, message: Task }>}
      */
-    create(title: string, description: string, color: string): Promise<{ status: boolean, message: string }> {
+    create(title: string, description: string, color: string): Promise<{ status: boolean, message: Task }> {
         return new Promise((resolve) => {
             if (localStorage.getItem('token') === null) {
-                resolve({ status: false, message: 'No token found' });
+                alert('You are not logged in');
             } else {
                 const path = "/api/v1/tasks";
                 axios.post(config.apiUrl + path, {
@@ -84,10 +84,10 @@ const TaskService = {
                     if (response.status === 200) {
                         resolve({ status: true, message: response.data });
                     } else {
-                        resolve({ status: false, message: response.data.errors.message });
+                        alert(response.data.errors.message);
                     }
                 }).catch((error) => {
-                    resolve({ status: false, message: error });
+                    alert(error);
                 });
             }
         });
