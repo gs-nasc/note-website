@@ -9,7 +9,7 @@ const theme = {
     getUserColor: () => {
         return localStorage.getItem("userColor") || theme.randomColor();
     },
-    getNotesColor: () => {
+    getRandomNotesColor: () => {
         const colors = [
             {
                 color: "#26547c",
@@ -45,7 +45,7 @@ const theme = {
             }
         ];
 
-        return colors;
+        return colors[Math.floor(Math.random() * colors.length)];
     }
 }
 
